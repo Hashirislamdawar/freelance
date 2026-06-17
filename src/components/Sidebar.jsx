@@ -15,7 +15,7 @@ const NAV = [
   { to: '/guide', label: 'Guide', icon: Icon.guide },
 ]
 
-export default function Sidebar() {
+export default function Sidebar({ open = false, onClose = () => {} }) {
   const store = useStore()
 
   function exportJson() {
@@ -38,7 +38,7 @@ export default function Sidebar() {
   }
 
   return (
-    <aside className="sidebar">
+    <aside className={'sidebar' + (open ? ' open' : '')}>
       <div className="brand">
         <span className="logo">⚡</span>
         <div>
@@ -49,7 +49,13 @@ export default function Sidebar() {
 
       <nav className="nav">
         {NAV.map((n) => (
-          <NavLink key={n.to} to={n.to} end={n.end} className={({ isActive }) => 'nav-item' + (isActive ? ' active' : '')}>
+          <NavLink
+            key={n.to}
+            to={n.to}
+            end={n.end}
+            onClick={onClose}
+            className={({ isActive }) => 'nav-item' + (isActive ? ' active' : '')}
+          >
             <Svg d={n.icon} />
             {n.label}
           </NavLink>

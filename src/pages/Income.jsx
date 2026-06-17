@@ -29,7 +29,7 @@ export default function Income() {
     <>
       <PageHeader title="Income — Goals & Forecast" subtitle="Revenue is pulled automatically from paid invoices. Set your annual goal below." />
 
-      <div className="grid-2" style={{ gridTemplateColumns: 'repeat(4,1fr)', marginBottom: 18 }}>
+      <div className="grid-4" style={{ marginBottom: 18 }}>
         {kpis.map((k) => (
           <div className="card pad" key={k.label}>
             <div className="card-sub">{k.label}</div>

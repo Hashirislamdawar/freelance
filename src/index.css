@@ -35,8 +35,45 @@ input, select, button { font-family: inherit; font-size: inherit; }
 
 /* ---------- layout ---------- */
 .app { display: flex; min-height: 100vh; }
+.content { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 .main { flex: 1; min-width: 0; padding: 28px 34px 60px; }
-@media (max-width: 760px) { .main { padding: 18px 16px 48px; } }
+
+/* mobile chrome (hidden on desktop) */
+.mobile-topbar { display: none; }
+.nav-overlay { display: none; }
+
+@media (max-width: 860px) {
+  .main { padding: 16px 15px 56px; }
+  .app .sidebar {
+    position: fixed; top: 0; left: 0; z-index: 60; height: 100vh;
+    width: min(82vw, 288px);
+    transform: translateX(-100%); transition: transform .24s ease;
+    box-shadow: 0 12px 44px rgba(2, 6, 23, .5);
+  }
+  .app .sidebar.open { transform: translateX(0); }
+  .nav-overlay {
+    display: block; position: fixed; inset: 0; z-index: 50;
+    background: rgba(15, 23, 42, .5);
+  }
+  .mobile-topbar {
+    display: flex; align-items: center; gap: 12px;
+    position: sticky; top: 0; z-index: 30;
+    background: var(--sidebar); color: #fff; padding: 11px 14px;
+  }
+  .hamburger {
+    display: grid; place-items: center; width: 38px; height: 38px;
+    border: 0; border-radius: 9px; background: rgba(148, 163, 184, 0.16);
+    color: #fff; cursor: pointer;
+  }
+  .hamburger svg { width: 20px; height: 20px; }
+  .mt-brand { font-weight: 700; font-size: 15px; display: flex; align-items: center; gap: 9px; }
+  .mt-logo {
+    width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center;
+    background: linear-gradient(135deg, var(--primary2), var(--indigo)); font-size: 15px;
+  }
+  .main .page-head h1 { font-size: 20px; }
+  .main .page-head { margin-bottom: 16px; }
+}
 
 /* ---------- sidebar ---------- */
 .sidebar {
@@ -171,7 +208,10 @@ table.dt tbody tr.flag:hover td { background: #fee2e2; }
 .stat-row .val { font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+@media (max-width: 980px) { .grid-4 { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 860px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .grid-4 { grid-template-columns: 1fr; } }
 .recharts-default-tooltip { border-radius: 10px !important; border: 1px solid var(--line) !important; box-shadow: var(--shadow) !important; }
 .muted { color: var(--muted); }
 .tag-note { font-size: 11px; color: var(--amber); font-weight: 600; }
